@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#090c0a" name="theme-color"/>
+<title>PULSE — фитнес-клуб в Тюмени</title>
+<meta content="PULSE — современный фитнес-клуб в Тюмени: силовой зал, функциональные тренировки, мобильность, персональные тренировки и зона восстановления." name="description"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23090c0a'/%3E%3Cpath d='M18 19h18c9 0 14 4 14 12 0 9-6 14-16 14H27v8h-9V19Zm9 8v10h7c5 0 7-2 7-5s-2-5-7-5h-7Z' fill='%23c7ff35'/%3E%3C/svg%3E" rel="icon"/>
+<meta content="dark" name="color-scheme"/>
+<style>
+:root{
+  --bg:#090c0a;
+  --bg2:#0d120f;
+  --panel:#111713;
+  --panel2:#151c17;
+  --text:#f4f7f4;
+  --muted:#a7b0aa;
+  --muted2:#738078;
+  --accent:#c7ff35;
+  --line:rgba(255,255,255,.085);
+  --line2:rgba(255,255,255,.16);
+  --rail:318px;
+  --max:1440px;
+  --radius:26px;
+  --shadow:0 26px 75px rgba(0,0,0,.34);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Segoe UI",Inter,Arial,sans-serif;font-weight:400;line-height:1.5;overflow-x:hidden}
+body.lock{overflow:hidden}
+img{display:block;width:100%;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+button{color:inherit}
+::selection{background:var(--accent);color:#071000}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* LEFT NAVIGATION */
+.sidebar{position:fixed;inset:0 auto 0 0;width:var(--rail);z-index:70;padding:26px 20px 22px;background:#070a08;border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:auto}
+.brand{padding:2px 10px 22px}
+.brand-name{font-size:35px;font-weight:650;letter-spacing:-.055em;line-height:.9}
+.brand-name span{display:block;color:var(--accent);font-size:10px;letter-spacing:.22em;font-weight:600;margin-top:10px}
+.brand p{margin:14px 0 0;color:var(--muted);font-size:13px;line-height:1.55}
+.nav{display:grid;gap:7px}
+.nav a{display:flex;align-items:center;gap:12px;min-height:50px;padding:0 15px;border:1px solid rgba(255,255,255,.055);border-radius:14px;background:#0b100d;color:#aeb7b1;font-size:15px;font-weight:560;transition:background-color .16s ease,border-color .16s ease,color .16s ease,transform .16s ease}
+.nav a::before{content:"";width:7px;height:7px;border-radius:50%;background:#78837c;flex:0 0 auto;transition:background-color .16s ease}
+.nav a:hover{color:#fff;background:#111812;border-color:rgba(255,255,255,.11);transform:translateX(2px)}
+.nav a.active{color:#071000;background:var(--accent);border-color:var(--accent);box-shadow:0 8px 22px rgba(199,255,53,.10);transform:none}
+.nav a.active::before{background:#071000}
+.nav a[aria-current="page"]{cursor:default}
+.side-cta{margin-top:18px;padding:18px;border:1px solid var(--line2);border-radius:20px;background:linear-gradient(180deg,rgba(199,255,53,.08),rgba(255,255,255,.015))}
+.side-cta small,.dev small{display:block;color:var(--muted2);font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.side-cta strong{display:block;margin:8px 0 6px;font-size:22px;font-weight:600;letter-spacing:-.02em}
+.side-cta p{margin:0 0 15px;color:var(--muted);font-size:13px;line-height:1.55}
+.side-meta{margin-top:auto;padding:18px 10px 0;border-top:1px solid var(--line);display:grid;gap:7px;color:var(--muted);font-size:12px}
+.side-meta a:hover{color:var(--accent)}
+.dev{margin-top:10px;padding-top:12px;border-top:1px solid rgba(255,255,255,.06)}
+.dev b,.dev a{display:block;font-size:12px;line-height:1.55}
+.dev b{font-weight:600;color:#e6ebe7}
+
+/* MOBILE HEADER */
+.mobile-head{display:none;position:sticky;top:0;z-index:100;align-items:center;justify-content:space-between;padding:14px 16px;background:rgba(7,10,8,.96);border-bottom:1px solid var(--line)}
+.mobile-brand{font-size:25px;font-weight:650;letter-spacing:-.04em}.mobile-brand span{color:var(--accent)}
+.menu{width:50px;height:50px;border:1px solid var(--line2);border-radius:14px;background:#101511;font-size:22px;cursor:pointer}
+.drawer{display:none;position:fixed;z-index:110;top:78px;left:14px;right:14px;padding:14px;background:#0d120f;border:1px solid var(--line2);border-radius:22px;box-shadow:var(--shadow)}
+.drawer.open{display:block}
+
+main,.footer{margin-left:var(--rail)}
+.section{padding:96px clamp(28px,5vw,78px);border-bottom:1px solid rgba(255,255,255,.05);scroll-margin-top:0}
+.wrap{width:min(var(--max),100%);margin:auto}
+.eyebrow{margin:0 0 12px;color:var(--accent);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.hero-title,.section-title{margin:0;font-weight:600;letter-spacing:-.05em;line-height:.94}
+.hero-title{font-size:clamp(60px,7.6vw,112px)}
+.section-title{font-size:clamp(40px,4.8vw,68px)}
+.accent{color:var(--accent)}
+.lead{max-width:720px;margin:22px 0 0;color:var(--muted);font-size:18px;line-height:1.72}
+.muted{color:var(--muted);font-size:16px;line-height:1.68}
+.small{color:var(--muted2);font-size:13px;line-height:1.6}
+.section-head{display:grid;grid-template-columns:1fr minmax(300px,500px);gap:52px;align-items:end;margin-bottom:40px}
+
+.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{min-height:58px;padding:0 24px;border-radius:15px;border:1px solid var(--line2);background:transparent;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;cursor:pointer;transition:.18s ease}
+.btn:hover{transform:translateY(-1px);border-color:rgba(199,255,53,.55)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#071000}
+.btn.primary:hover{background:#dcff7b}
+.btn.full{width:100%}
+
+/* HERO */
+.hero{min-height:100svh;display:flex;align-items:center;padding-top:42px;padding-bottom:42px;background:radial-gradient(circle at 72% 28%,rgba(199,255,53,.06),transparent 30%)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(420px,590px);gap:52px;align-items:center}
+.hero-media{position:relative;min-height:720px;border-radius:34px;overflow:hidden;border:1px solid var(--line);background:#111;box-shadow:var(--shadow)}
+.hero-media img{position:absolute;inset:0;height:100%;object-fit:cover;filter:saturate(.92) contrast(1.02)}
+.hero-media::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(5,8,6,.82))}
+.media-note{position:absolute;z-index:2;left:24px;right:24px;bottom:22px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.media-note b{font-size:25px;font-weight:600;letter-spacing:-.02em}.media-note span{max-width:250px;color:#d7ddd8;font-size:13px;text-align:right;line-height:1.5}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:36px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{padding:22px 18px 22px 0}.stat+.stat{border-left:1px solid var(--line);padding-left:18px}.stat b{display:block;font-size:27px;font-weight:600;letter-spacing:-.03em}.stat span{display:block;margin-top:5px;color:var(--muted2);font-size:12px}
+
+/* PRINCIPLES */
+.philosophy{background:var(--bg2)}
+.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.principle{padding:26px;border:1px solid var(--line);border-radius:23px;background:rgba(255,255,255,.02)}
+.principle .n{color:var(--accent);font-size:12px;letter-spacing:.14em;font-weight:600}.principle h3{margin:32px 0 10px;font-size:25px;font-weight:550;letter-spacing:-.02em}.principle p{margin:0;color:var(--muted);font-size:14px;line-height:1.65}
+
+/* PROGRAMS — EVERY PHOTO UNIQUE */
+.program-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.program{border:1px solid var(--line);border-radius:27px;overflow:hidden;background:var(--panel)}
+.program-photo{height:360px;overflow:hidden}.program-photo img{height:100%;object-fit:cover;transition:transform .35s ease}.program:hover .program-photo img{transform:scale(1.018)}
+.program-body{padding:24px 25px 26px}.program-body h3{margin:0 0 9px;font-size:28px;font-weight:550;letter-spacing:-.03em}.program-body p{margin:0;color:var(--muted);font-size:15px;line-height:1.65}
+
+/* PRICING */
+.membership{background:var(--bg2)}
+.terms{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:21px}.term{height:45px;padding:0 17px;border:1px solid var(--line);border-radius:12px;background:#0e130f;color:var(--muted);font-weight:550;cursor:pointer}.term.active{background:var(--accent);border-color:var(--accent);color:#071000}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.plan{padding:28px;border:1px solid var(--line);border-radius:25px;background:#0f1511;display:flex;flex-direction:column;min-height:430px}.plan.featured{border-color:rgba(199,255,53,.55);box-shadow:inset 0 0 0 1px rgba(199,255,53,.05)}
+.plan-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.plan h3{margin:0;font-size:30px;font-weight:550}.badge{color:var(--accent);font-size:9px;text-transform:uppercase;letter-spacing:.12em;font-weight:600}.price{margin:30px 0 2px;font-size:48px;font-weight:600;letter-spacing:-.04em}.per{color:var(--muted2);font-size:13px}.plan ul{list-style:none;padding:0;margin:22px 0 29px;display:grid;gap:11px;color:var(--muted);font-size:14px}.plan li::before{content:"✓";color:var(--accent);margin-right:8px}.plan .btn{margin-top:auto}
+
+/* SCHEDULE */
+.schedule-grid{display:grid;grid-template-columns:390px 1fr;gap:24px}.schedule-card{padding:30px;border:1px solid var(--line);border-radius:25px;background:#0f1511}.schedule-card h3{margin:0;font-size:29px;font-weight:550;letter-spacing:-.025em}.days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:22px}.day{min-height:54px;border:1px solid var(--line);border-radius:12px;background:#0c110e;color:var(--muted);font-weight:550;cursor:pointer}.day.active{background:var(--accent);border-color:var(--accent);color:#071000}.slots{display:grid;gap:10px}.slot{display:grid;grid-template-columns:105px 1fr auto;align-items:center;gap:18px;padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,.05);background:#121814}.slot time{font-size:23px;color:var(--accent);font-weight:600}.slot b{display:block;font-weight:550;font-size:18px}.slot span{color:var(--muted2);font-size:13px}
+
+/* GALLERY */
+.gallery-grid{display:grid;grid-template-columns:1.18fr .82fr;grid-template-rows:340px 340px;gap:16px}.gallery-card{position:relative;border-radius:26px;overflow:hidden;border:1px solid var(--line);background:#111}.gallery-card:first-child{grid-row:1/3}.gallery-card img{height:100%;object-fit:cover;transition:transform .35s ease}.gallery-card:hover img{transform:scale(1.018)}.gallery-card::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(4,7,5,.84))}.gallery-copy{position:absolute;z-index:2;left:23px;right:23px;bottom:21px}.gallery-copy b{display:block;font-size:24px;font-weight:550}.gallery-copy span{display:block;margin-top:5px;color:#d8ded9;font-size:13px;line-height:1.5}
+
+/* COACHES */
+.coaches{background:var(--bg2)}.coach-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.coach{padding:24px;border:1px solid var(--line);border-radius:22px;background:#0e130f}.mono{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(199,255,53,.27);color:var(--accent);font-size:20px;font-weight:600;margin-bottom:26px}.coach h3{margin:0 0 5px;font-size:21px;font-weight:550}.coach strong{display:block;color:#d4dad6;font-size:12px;font-weight:550;text-transform:uppercase;letter-spacing:.08em}.coach p{margin:14px 0 0;color:var(--muted);font-size:13px;line-height:1.62}
+
+/* REVIEWS */
+.reviews-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.review{padding:25px;border:1px solid var(--line);border-radius:23px;background:rgba(255,255,255,.018)}.stars{color:var(--accent);letter-spacing:.12em;font-size:12px}.review blockquote{margin:22px 0 28px;font-size:17px;line-height:1.72;color:#dbe1dc}.review footer{color:var(--muted2);font-size:13px}.review footer b{color:#dce2dd;font-weight:550}
+
+/* CONTACT */
+.contact-card{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:24px;padding:32px;border:1px solid var(--line);border-radius:29px;background:linear-gradient(135deg,#121814,#0c110e)}.contact-list{display:grid;gap:10px}.contact-row{padding:18px 19px;border-radius:17px;border:1px solid rgba(255,255,255,.05);background:#101612}.contact-row span{display:block;color:var(--muted2);font-size:12px;margin-bottom:6px}.contact-row b,.contact-row a{font-size:19px;font-weight:550}.contact-row a:hover{color:var(--accent)}
+#contact .btn.primary{min-height:68px;padding:0 32px;font-size:16px}
+
+
+.gallery-heading{margin-bottom:34px}
+.gallery-heading .section-title{max-width:none}
+.section-head-wide{grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr)}
+.reviews-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,520px);gap:48px;align-items:end;margin-bottom:38px}
+@media(min-width:901px){
+  .section:not(.hero){min-height:100svh;display:flex;align-items:center}
+  #schedule,#gallery,#coaches,#reviews{min-height:100svh}
+}
+
+.footer{padding:26px clamp(28px,5vw,78px) 48px}.footer-inner{width:min(var(--max),100%);margin:auto;padding:23px 25px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.018);display:grid;grid-template-columns:1fr auto;gap:24px}.footer b{display:block;margin-bottom:6px;font-size:17px;font-weight:550}.footer span,.footer a{color:var(--muted);font-size:13px;line-height:1.55}.footer a:hover{color:var(--accent)}
+
+/* MODAL */
+.modal{position:fixed;inset:0;z-index:200;display:none;place-items:center;padding:18px;background:rgba(4,6,5,.74)}.modal.open{display:grid}.dialog{width:min(560px,100%);padding:25px;border:1px solid var(--line2);border-radius:27px;background:#0d120f;box-shadow:var(--shadow)}.dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:21px}.dialog-head h3{margin:0;font-size:29px;font-weight:550;letter-spacing:-.025em}.close{width:46px;height:46px;border:1px solid var(--line);border-radius:14px;background:transparent;font-size:23px;cursor:pointer}.form{display:grid;gap:14px}.field{display:grid;gap:7px}.field label{font-size:13px;color:#dbe1dc}.field input,.field select{height:56px;border:1px solid var(--line2);border-radius:14px;background:#0f1511;color:#fff;padding:0 16px;font-size:16px}.success{display:none;padding:14px 0 4px;color:var(--muted)}.success b{display:block;margin-bottom:8px;color:#fff;font-size:23px;font-weight:550}
+
+@media(max-width:1180px){
+  .hero-grid{grid-template-columns:1fr}.hero-media{min-height:590px;max-width:820px}.principles,.plans,.reviews-grid{grid-template-columns:1fr}.program-grid,.coach-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.schedule-grid{grid-template-columns:1fr}.contact-card{grid-template-columns:1fr}.gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:390px 310px}.gallery-card:first-child{grid-column:1/-1;grid-row:auto}
+}
+@media(max-width:900px){
+  .section{scroll-margin-top:78px;min-height:auto;display:block}
+  .sidebar{display:none}.mobile-head{display:flex}main,.footer{margin-left:0}.section{padding:72px 18px}.hero{min-height:auto;padding-top:22px}.hero-grid{display:flex;flex-direction:column}.hero-copy{order:1}.hero-media{order:2;width:100%;min-height:500px}.hero-title{font-size:clamp(52px,15vw,78px)}.section-title{font-size:clamp(38px,10vw,58px)}.section-head,.reviews-heading{grid-template-columns:1fr;gap:18px}.stats{grid-template-columns:1fr}.stat+.stat{border-left:0;border-top:1px solid var(--line);padding-left:0}.program-grid,.coach-grid,.gallery-grid{grid-template-columns:1fr}.gallery-grid{grid-template-rows:none}.gallery-card,.gallery-card:first-child{min-height:390px;grid-column:auto;grid-row:auto}.slot{grid-template-columns:1fr;gap:12px}.slot .btn{width:100%}.footer-inner{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .hero-media{min-height:430px}.media-note{display:block}.media-note span{display:block;margin-top:7px;text-align:left;max-width:none}.buttons{display:grid}.btn{width:100%}.days{grid-template-columns:repeat(4,minmax(0,1fr))}.price{font-size:42px}.program-photo{height:300px}
+}
+
+@media(max-width:900px){
+  .mobile-head{padding-top:max(14px,env(safe-area-inset-top));}
+  .drawer{top:calc(78px + env(safe-area-inset-top));max-height:calc(100dvh - 96px - env(safe-area-inset-top));}
+  .modal{padding:12px;padding-bottom:max(12px,env(safe-area-inset-bottom));}
+  .dialog{max-height:calc(100dvh - 24px);}
+  .field input,.field select{font-size:16px;}
+}
+@media(max-width:430px){
+  .section{padding-left:16px;padding-right:16px}
+  .hero-title{font-size:clamp(48px,14.5vw,66px)}
+  .section-title{font-size:clamp(36px,10.5vw,48px)}
+  .hero-media{min-height:400px}
+  .program-photo{height:280px}
+  .gallery-card,.gallery-card:first-child{min-height:340px}
+  .contact-card{padding:22px 18px}
+  .footer{padding-left:16px;padding-right:16px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.program-photo img,.gallery-card img,.btn{transition:none}}
+
+/* FINAL QA */
+*,*::before,*::after{min-width:0}
+html{scrollbar-gutter:stable}
+.nav a,.btn,.term,.day,.menu{touch-action:manipulation}
+.drawer{max-height:calc(100dvh - 94px);overflow-y:auto;overscroll-behavior:contain}
+.dialog{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain}
+.contact-card .buttons .btn.primary{min-width:min(100%,360px)}
+.program-body h3,.coach h3,.contact-row b,.contact-row a,.footer-inner{overflow-wrap:anywhere}
+@media(hover:none){.program:hover .program-photo img,.gallery-card:hover img,.btn:hover{transform:none}}
+@media(max-width:1080px){
+  .sidebar{display:none}
+  .mobile-head{display:flex}
+  main,.footer{margin-left:0}
+  .section{scroll-margin-top:79px}
+}
+@media(min-width:901px) and (max-width:1080px){
+  .section{padding-left:34px;padding-right:34px}
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero-media{min-height:620px;max-width:860px}
+}
+@media(max-width:560px){
+  .drawer{left:10px;right:10px}
+  .contact-card{padding:24px 20px}
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar">
+<div class="brand">
+<div class="brand-name">PULSE<span>FITNESS CLUB</span></div>
+<p>Силовой зал, функциональные тренировки, мобильность и зона восстановления в одном пространстве.</p>
+</div>
+<nav aria-label="Навигация" class="nav desktop-nav">
+<a class="active" href="#hero">Главная</a>
+<a href="#programs">Направления</a>
+<a href="#membership">Абонементы</a>
+<a href="#schedule">Расписание</a>
+<a href="#gallery">Пространство</a>
+<a href="#coaches">Тренеры</a>
+<a href="#reviews">Отзывы</a>
+<a href="#contact">Контакты</a>
+</nav>
+<div class="side-cta">
+<small>Первый визит</small>
+<strong>Пробная тренировка</strong>
+<p>Посмотри клуб, познакомься с зонами и выбери подходящий формат.</p>
+<button class="btn primary full" data-context="Пробная тренировка" data-open="" type="button">Записаться</button>
+</div>
+<div class="side-meta">
+<div>Тюмень · ул. Республики, 92</div>
+<div>Ежедневно · 06:00–00:00</div>
+<a href="tel:+73452614022">+7 (3452) 614-022</a>
+<div class="dev">
+<small>Разработка сайта</small>
+<b>Кошелев Илья Вадимович</b>
+<a href="tel:+79334294564">+7 933 429-45-64</a>
+<a href="https://t.me/all_might_symbol" rel="noreferrer" target="_blank">@all_might_symbol</a>
+</div>
+</div>
+</aside>
+<header class="mobile-head">
+<div class="mobile-brand">PULSE <span>FIT</span></div>
+<button aria-expanded="false" aria-label="Открыть меню" class="menu" id="menu" type="button">☰</button>
+</header>
+<div class="drawer" id="drawer">
+<nav aria-label="Мобильная навигация" class="nav">
+<a href="#hero">Главная</a><a href="#programs">Направления</a><a href="#membership">Абонементы</a><a href="#schedule">Расписание</a><a href="#gallery">Пространство</a><a href="#coaches">Тренеры</a><a href="#reviews">Отзывы</a><a href="#contact">Контакты</a>
+</nav>
+</div>
+<main>
+<section class="section hero" id="hero"><div class="wrap hero-grid">
+<div class="hero-copy">
+<p class="eyebrow">Фитнес-клуб нового формата</p>
+<h1 class="hero-title">Тренируйся<br/><span class="accent">сильнее.</span><br/>Живи легче.</h1>
+<p class="lead">PULSE объединяет силовой зал, функциональные тренировки, работу над мобильностью, персональные тренировки и зону восстановления. Пространство для системной работы без лишнего шума.</p>
+<div class="buttons"><button class="btn primary" data-context="Пробная тренировка" data-open="" type="button">Пробная тренировка</button><a class="btn" href="#membership">Абонементы</a></div>
+<div class="stats"><div class="stat"><b>1200 м²</b><span>площадь клуба</span></div><div class="stat"><b>06:00–00:00</b><span>ежедневно</span></div><div class="stat"><b>4 зоны</b><span>зал · функциональные · мобильность · восстановление</span></div></div>
+</div>
+<div class="hero-media"><img alt="Современный фитнес-зал" decoding="async" fetchpriority="high" loading="eager" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Interior%20of%20new%20modern%20gym%20with%20equipment.jpg?width=1800"/><div class="media-note"><b>PULSE / ТЮМЕНЬ</b><span>Современное пространство для силы, движения и восстановления.</span></div></div>
+</div></section>
+<section class="section" id="programs"><div class="wrap">
+<div class="section-head"><div><p class="eyebrow">Направления</p><h2 class="section-title">Выбери свой<br/><span class="accent">формат.</span></h2></div><p class="muted">Каждая зона решает свою задачу: силовая работа, функциональный тренинг, мобильность и персональные тренировки.</p></div>
+<div class="program-grid">
+<article class="program"><div class="program-photo"><img alt="Силовая тренировка" decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Strong%20woman%20lifting%20weights%20in%20a%20gym%20focused%20on%20fitness%20and%20strength%20training.jpg?width=1600"/></div><div class="program-body"><h3>Силовой зал</h3><p>Свободные веса, силовые рамы и базовое оборудование для системного прогресса.</p></div></article>
+<article class="program"><div class="program-photo"><img alt="Функциональная тренировка" decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Participants%20in%20a%20fitness%20class%20engage%20in%20an%20energetic%20session%2C%20while%20one%20individual%20observes%20from%20the%20side.%20Equipment%20is%20set%20up%20for%20various%20workouts%2C%20enhancing%20the%20atmosphere.jpg?width=1600"/></div><div class="program-body"><h3>Функциональный тренинг</h3><p>Сила, выносливость и координация в динамичных индивидуальных и групповых форматах.</p></div></article>
+<article class="program"><div class="program-photo"><img alt="Тренировка на мобильность" decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Yoga%20Class%20at%20a%20Gym.JPG?width=1200"/></div><div class="program-body"><h3>Мобильность</h3><p>Работа с подвижностью, контролем движения и качеством восстановления.</p></div></article>
+<article class="program"><div class="program-photo"><img alt="Персональная тренировка с тренером" decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/A%20coach%20observes%20an%20athlete%20performing%20a%20weightlifting%20exercise.jpg?width=1600"/></div><div class="program-body"><h3>Персональные тренировки</h3><p>Индивидуальный план, контроль техники и работа с тренером под конкретную цель.</p></div></article>
+</div>
+</div></section>
+<section class="section membership" id="membership"><div class="wrap">
+<div class="section-head"><div><p class="eyebrow">Абонементы</p><h2 class="section-title">Выбери<br/><span class="accent">свой режим.</span></h2></div><p class="muted">Три тарифа и переключение срока. Цена меняется прямо в карточке без перезагрузки страницы.</p></div>
+<div aria-label="Срок абонемента" class="terms"><button aria-pressed="true" class="term active" data-term="1" type="button">1 месяц</button><button aria-pressed="false" class="term" data-term="6" type="button">6 месяцев</button><button aria-pressed="false" class="term" data-term="12" type="button">12 месяцев</button></div>
+<div class="plans"><article class="plan"><div class="plan-top"><h3>BASE</h3><span class="badge">старт</span></div><div class="price" data-price="base">3 900 ₽</div><div class="per">в месяц</div><ul><li>тренажёрный зал</li><li>1 групповой класс в неделю</li><li>доступ с 06:00 до 17:00</li></ul><button class="btn" data-open="" data-plan="BASE" type="button">Выбрать BASE</button></article><article class="plan featured"><div class="plan-top"><h3>MOVE</h3><span class="badge">популярный</span></div><div class="price" data-price="move">5 900 ₽</div><div class="per">в месяц</div><ul><li>безлимитный зал</li><li>групповые и функциональные тренировки</li><li>мобильность и зона восстановления</li></ul><button class="btn primary" data-open="" data-plan="MOVE" type="button">Выбрать MOVE</button></article><article class="plan"><div class="plan-top"><h3>COACH</h3><span class="badge">персонально</span></div><div class="price" data-price="coach">13 900 ₽</div><div class="per">в месяц</div><ul><li>всё из MOVE</li><li>4 персональные тренировки</li><li>индивидуальный план</li></ul><button class="btn" data-open="" data-plan="COACH" type="button">Выбрать COACH</button></article></div>
+</div></section>
+<section class="section" id="schedule"><div class="wrap">
+<div class="section-head"><div><p class="eyebrow">Расписание</p><h2 class="section-title">Выбери день<br/><span class="accent">и тренировку.</span></h2></div><p class="muted">Нажатие на занятие сразу открывает форму с выбранным временем и форматом.</p></div>
+<div class="schedule-grid"><div class="schedule-card"><h3>День недели</h3><p class="small">Групповые занятия и короткие функциональные форматы.</p><div class="days"><button aria-pressed="true" class="day active" data-day="mon" type="button">Пн</button><button aria-pressed="false" class="day" data-day="tue" type="button">Вт</button><button aria-pressed="false" class="day" data-day="wed" type="button">Ср</button><button aria-pressed="false" class="day" data-day="thu" type="button">Чт</button><button aria-pressed="false" class="day" data-day="fri" type="button">Пт</button><button aria-pressed="false" class="day" data-day="sat" type="button">Сб</button><button aria-pressed="false" class="day" data-day="sun" type="button">Вс</button></div></div><div class="schedule-card"><div aria-live="polite" class="slots" id="slots"></div></div></div>
+</div></section>
+<section class="section" id="gallery"><div class="wrap">
+<div class="gallery-heading"><h2 class="section-title">Пространство клуба</h2></div>
+<div class="gallery-grid"><article class="gallery-card"><img alt="Интерьер фитнес-клуба" decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Design%20and%20equipment%20in%20modern%20gym.jpg?width=1800"/><div class="gallery-copy"><b>Основной зал</b><span>Большая открытая зона с тренажёрами и свободными весами.</span></div></article><article class="gallery-card"><img alt="Студия растяжки" decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/This%20gym%20room%20showcases%20various%20workout%20machines.jpg?width=1400"/><div class="gallery-copy"><b>Студия растяжки</b><span>Спокойный формат для мобильности и растяжки.</span></div></article><article class="gallery-card"><img alt="Зона восстановления" decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/MPH-gym-interior-2018.jpg?width=1400"/><div class="gallery-copy"><b>Восстановление</b><span>Зона восстановления после нагрузки.</span></div></article></div>
+</div></section>
+<section class="section coaches" id="coaches"><div class="wrap">
+<div class="section-head section-head-wide"><div><p class="eyebrow">Команда</p><h2 class="section-title">Тренеры по специализациям</h2></div><p class="muted">Силовая подготовка, мобильность, персональные тренировки и групповые занятия — у каждого тренера своя роль.</p></div>
+<div class="coach-grid"><article class="coach"><div class="mono">AM</div><h3>Артём Мельников</h3><strong>силовая подготовка</strong><p>Техника базовых упражнений, развитие силы и стабильная программа.</p></article><article class="coach"><div class="mono">EK</div><h3>Ева Крылова</h3><strong>функциональный тренинг / мобильность</strong><p>Работа с мобильностью, корпусом, координацией и выносливостью.</p></article><article class="coach"><div class="mono">DN</div><h3>Денис Нестеров</h3><strong>персональный тренинг</strong><p>Индивидуальные программы под форму, силу и контроль техники.</p></article><article class="coach"><div class="mono">SV</div><h3>Софья Веденеева</h3><strong>групповые занятия</strong><p>Мини-группы, адаптация новичков и работа с темпом нагрузки.</p></article></div>
+</div></section>
+<section class="section" id="reviews"><div class="wrap">
+<div class="reviews-heading"><div><p class="eyebrow">Отзывы</p><h2 class="section-title">Отзывы клиентов</h2></div><p class="muted">Коротко о том, за что выбирают PULSE: пространство, спокойный подход тренеров и возможность восстановиться после нагрузки.</p></div>
+<div class="reviews-grid"><article class="review"><div class="stars">★★★★★</div><blockquote>«Просторно даже вечером. Нормально собран зал и не приходится ждать базовое оборудование.»</blockquote><footer><b>Максим</b> · клиент клуба<div class="photo-credit" style="width:min(var(--max),100%);margin:14px auto 0;color:#66716a;font-size:11px;line-height:1.5">Фото: Wikimedia Commons · Creative Commons. Использованы отдельные реальные фотографии спортзалов и тренировок.</div></footer></article><article class="review"><div class="stars">★★★★★</div><blockquote>«Начала с занятий на мобильность, потом добавила силовые. Тренеры объясняют спокойно и без лишнего давления.»</blockquote><footer><b>Дарья</b> · клиент клуба</footer></article><article class="review"><div class="stars">★★★★★</div><blockquote>«Нравится, что после тренировки можно спокойно восстановиться, а не сразу уходить из клуба.»</blockquote><footer><b>Алексей</b> · клиент клуба</footer></article></div>
+</div></section>
+<section class="section" id="contact"><div class="wrap"><div class="contact-card"><div><p class="eyebrow">Первый визит</p><h2 class="section-title">Посмотри клуб<br/><span class="accent">до покупки.</span></h2><p class="lead">Пробная тренировка — чтобы спокойно посмотреть пространство, понять формат и выбрать тариф без спешки.</p><div class="buttons"><button class="btn primary" data-context="Пробная тренировка" data-open="" type="button">Записаться на пробную тренировку</button></div></div><div class="contact-list"><div class="contact-row"><span>Город</span><b>Тюмень</b></div><div class="contact-row"><span>Адрес</span><b>ул. Республики, 92</b></div><div class="contact-row"><span>Телефон</span><a href="tel:+73452614022">+7 (3452) 614-022</a></div><div class="contact-row"><span>График</span><b>06:00–00:00 · ежедневно</b></div></div></div></div></section>
+</main>
+<footer class="footer"><div class="footer-inner"><div><b>PULSE FITNESS CLUB</b><span>Концепт для портфолио · Тюмень · 2026</span></div><div><b>Разработка сайта</b><span>Кошелев Илья Вадимович</span><br/><a href="tel:+79334294564">+7 933 429-45-64</a><br/><a href="https://t.me/all_might_symbol" rel="noreferrer" target="_blank">@all_might_symbol</a></div></div></footer>
+<div aria-hidden="true" class="modal" id="modal"><div aria-labelledby="modalTitle" aria-modal="true" class="dialog" role="dialog"><div class="dialog-head"><div><p class="eyebrow">PULSE / запись</p><h3 id="modalTitle">Пробная тренировка</h3></div><button aria-label="Закрыть" class="close" id="closeModal" type="button">×</button></div><form class="form" id="form"><div class="field"><label for="name">Имя</label><input autocomplete="name" id="name" placeholder="Ваше имя" required=""/></div><div class="field"><label for="phone">Телефон</label><input autocomplete="tel" id="phone" inputmode="tel" placeholder="+7 999 123-45-67" required="" type="tel"/></div><div class="field"><label for="goal">Интересует</label><select id="goal"><option>Пробная тренировка</option><option>Тариф BASE</option><option>Тариф MOVE</option><option>Тариф COACH</option><option>Функциональный тренинг</option><option>Мобильность</option><option>Персональные тренировки</option></select></div><button class="btn primary" type="submit">Оставить заявку</button></form><div aria-live="polite" class="success" id="success" role="status"><b>Готово.</b><div>Это демонстрационная форма портфолио — данные не отправляются.</div></div></div></div>
+<script>
+const body=document.body,menu=document.getElementById('menu'),drawer=document.getElementById('drawer'),modal=document.getElementById('modal'),closeBtn=document.getElementById('closeModal'),form=document.getElementById('form'),success=document.getElementById('success'),goal=document.getElementById('goal'),modalTitle=document.getElementById('modalTitle');let returnFocus=null;
+function lock(v){body.classList.toggle('lock',v)}
+function closeDrawer(){drawer.classList.remove('open');menu.textContent='☰';menu.setAttribute('aria-expanded','false');if(!modal.classList.contains('open'))lock(false)}
+menu.addEventListener('click',()=>{const open=!drawer.classList.contains('open');drawer.classList.toggle('open',open);menu.textContent=open?'×':'☰';menu.setAttribute('aria-expanded',String(open));lock(open)});
+drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeDrawer));
+document.addEventListener('click',e=>{if(innerWidth<=1080&&drawer.classList.contains('open')&&!drawer.contains(e.target)&&!menu.contains(e.target))closeDrawer()});
+function openModal(context='Пробная тренировка',trigger=null){returnFocus=trigger||document.activeElement;form.reset();form.style.display='grid';success.style.display='none';modalTitle.textContent=context;goal.querySelectorAll('option[data-dynamic]').forEach(o=>o.remove());let opt=[...goal.options].find(o=>o.textContent===context);if(!opt){opt=document.createElement('option');opt.textContent=context;opt.value=context;opt.dataset.dynamic='true';goal.prepend(opt)}goal.value=context;modal.classList.add('open');modal.setAttribute('aria-hidden','false');lock(true);setTimeout(()=>document.getElementById('name').focus(),30)}
+function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');if(!drawer.classList.contains('open'))lock(false);returnFocus?.focus?.()}
+document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{const term=document.querySelector('.term.active')?.textContent.trim()||'';openModal(b.dataset.plan?`Тариф ${b.dataset.plan} · ${term}`:(b.dataset.context||'Пробная тренировка'),b)}));
+closeBtn.addEventListener('click',closeModal);modal.addEventListener('mousedown',e=>{if(e.target===modal)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(modal.classList.contains('open'))closeModal();else closeDrawer()}});
+form.addEventListener('submit',e=>{e.preventDefault();form.style.display='none';success.style.display='block'});
+const prices={1:{base:'3 900 ₽',move:'5 900 ₽',coach:'13 900 ₽'},6:{base:'3 400 ₽',move:'5 300 ₽',coach:'12 900 ₽'},12:{base:'2 990 ₽',move:'4 800 ₽',coach:'11 900 ₽'}};
+document.querySelectorAll('.term').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.term').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});b.classList.add('active');b.setAttribute('aria-pressed','true');const p=prices[b.dataset.term];for(const[k,v]of Object.entries(p))document.querySelector(`[data-price="${k}"]`).textContent=v;const period=b.dataset.term==='1'?'в месяц':`в месяц · при оплате за ${b.dataset.term} мес.`;document.querySelectorAll('.per').forEach(x=>x.textContent=period)}));
+const schedule={mon:[['07:30','Функциональный старт','Софья Веденеева'],['12:00','Мобильность','Ева Крылова'],['18:30','Силовая база','Артём Мельников']],tue:[['08:00','Контроль корпуса','Софья Веденеева'],['13:00','Персональная тренировка','Денис Нестеров'],['19:30','Функциональная тренировка','Ева Крылова']],wed:[['07:30','Силовая база','Артём Мельников'],['12:30','Мобильность','Ева Крылова'],['20:00','Восстановление и растяжка','Софья Веденеева']],thu:[['08:30','Функциональная тренировка','Софья Веденеева'],['14:00','Техника движения','Денис Нестеров'],['19:00','Сильный корпус','Ева Крылова']],fri:[['07:30','Вводная силовая','Артём Мельников'],['13:00','Восстановление','Ева Крылова'],['18:30','Функциональная тренировка','Софья Веденеева']],sat:[['10:00','Тренировка всего тела','Денис Нестеров'],['12:30','Мобильность','Ева Крылова'],['16:00','Силовая база','Артём Мельников']],sun:[['11:00','Восстановление','Ева Крылова'],['13:00','Лёгкая функциональная','Софья Веденеева'],['18:00','Контроль корпуса','Денис Нестеров']]};
+const slots=document.getElementById('slots');function render(day){slots.innerHTML='';for(const[t,n,c]of schedule[day]){const row=document.createElement('div');row.className='slot';row.innerHTML=`<time>${t}</time><div><b>${n}</b><span>${c}</span></div>`;const action=document.createElement('button');action.className='btn';action.type='button';action.textContent='Записаться';action.addEventListener('click',()=>openModal(`${n} · ${t}`,action));row.append(action);slots.append(row)}}
+document.querySelectorAll('.day').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.day').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false')});b.classList.add('active');b.setAttribute('aria-pressed','true');render(b.dataset.day)}));render('mon');
+addEventListener('resize',()=>{if(innerWidth>1080&&drawer.classList.contains('open'))closeDrawer()});
+const sections=[...document.querySelectorAll('main section[id]')],links=[...document.querySelectorAll('.desktop-nav a')];
+let navScrollTarget=null,navUnlockTimer=0,navRaf=0;
+function setActiveNav(hash){
+  links.forEach(a=>{
+    const active=a.getAttribute('href')===hash;
+    a.classList.toggle('active',active);
+    if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+  });
+}
+function sectionAtReadingLine(){
+  if(!sections.length)return null;
+  const line=Math.min(innerHeight*.34,320);
+  let chosen=null,best=Infinity;
+  for(const section of sections){
+    const r=section.getBoundingClientRect();
+    if(r.top<=line&&r.bottom>line)return section;
+    const d=Math.abs(r.top-line);
+    if(d<best){best=d;chosen=section}
+  }
+  return chosen;
+}
+function syncDesktopNav(){
+  navRaf=0;
+  if(navScrollTarget){
+    const target=document.querySelector(navScrollTarget);
+    if(target){
+      const r=target.getBoundingClientRect();
+      const tolerance=innerWidth<=1080?82:34;
+      if(Math.abs(r.top)<=tolerance||(r.top<=tolerance&&r.bottom>tolerance)){
+        navScrollTarget=null;
+        clearTimeout(navUnlockTimer);
+      }else return;
+    }else navScrollTarget=null;
+  }
+  const current=sectionAtReadingLine();
+  if(current)setActiveNav('#'+current.id);
+}
+function requestNavSync(){if(!navRaf)navRaf=requestAnimationFrame(syncDesktopNav)}
+links.forEach(a=>a.addEventListener('click',e=>{
+  const hash=a.getAttribute('href');
+  const target=document.querySelector(hash);
+  if(!target)return;
+  e.preventDefault();
+  navScrollTarget=hash;
+  setActiveNav(hash);
+  history.replaceState(null,'',hash);
+  target.scrollIntoView({behavior:'smooth',block:'start'});
+  clearTimeout(navUnlockTimer);
+  navUnlockTimer=setTimeout(()=>{navScrollTarget=null;requestNavSync()},2200);
+}));
+addEventListener('scroll',requestNavSync,{passive:true});
+addEventListener('resize',requestNavSync,{passive:true});
+['wheel','touchstart'].forEach(type=>addEventListener(type,()=>{
+  if(navScrollTarget){navScrollTarget=null;clearTimeout(navUnlockTimer);requestNavSync()}
+},{passive:true}));
+if(location.hash&&links.some(a=>a.getAttribute('href')===location.hash))setActiveNav(location.hash);else requestNavSync();
+</script>
+</body>
+</html>
