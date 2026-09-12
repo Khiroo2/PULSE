@@ -1,0 +1,13 @@
+PULSE — фото
+
+Основные изображения: Pexels (free to use), оптимизированные CDN-версии.
+Локальные JPG в этой папке используются как резерв, если внешний CDN недоступен.
+
+Hero: https://www.pexels.com/photo/interior-of-modern-fitness-club-with-various-machines-and-equipment-7031705/
+Силовой зал: https://www.pexels.com/photo/man-resting-after-exercising-4162544/
+Функциональный тренинг: https://www.pexels.com/photo/black-and-gray-exercise-equipment-4716817/
+Мобильность: https://www.pexels.com/photo/man-exercising-in-a-gym-7397794/
+Персональные тренировки: https://www.pexels.com/photo/personal-trainer-and-a-man-sitting-on-a-gym-machine-smiling-and-fist-bumping-13621289/
+Основной зал: https://www.pexels.com/photo/various-fitness-machines-in-modern-spacious-gym-7031706/
+Студия растяжки: https://www.pexels.com/photo/man-exercising-at-a-gym-4164459/
+Восстановление: https://www.pexels.com/photo/man-sitting-and-drinking-from-a-water-bottle-4164754/
